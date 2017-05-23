@@ -6,10 +6,10 @@ import os
 from datetime import datetime
 
 #FOR COMBINING GRAPHS INTO ONE
-
+#for all emotions
 emo = ['cheerful','depressing','exciting','fun','happy','hate','joy','love','lovely','melancholy','mellow','sad','senti','sentimental','shock','terrible','very_happy']
 for e in emo:
-
+    #Remember to change male/female accordingly
     path1 = "Graphs/"+e+"/Male/"
     path2 = "Graphs/"+e+"/Male/Combined/"
     infile_or = ""
@@ -28,7 +28,7 @@ for e in emo:
 
     print A
 
-    outfile = "Combined_Matrix_" + infile_or[6:13] + "_"+e+".net"
+    outfile = "Combined_Matrix_" + infile_or[6:13] + "_"+e+".net"   #[6:13] for males, [6:15] for females
     for infile in os.listdir(path1):
         if not infile.startswith('.'):
 
