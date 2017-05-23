@@ -1,3 +1,5 @@
+#This file will compute the granger causality of all the elctrodes with each other. We compute the granger causality and store it in folder Granger_lists
+
 from scipy import signal
 import pandas as pd
 import numpy as np
@@ -18,24 +20,30 @@ from statsmodels.tsa.vector_ar import var_model
 import statsmodels.tsa.stattools as tsa_stats
 import json
 
+#list of all emotions
 emo = ['cheerful','depressing','exciting','fun','happy','hate','joy','love','lovely','melancholy','mellow','sad','senti','sentimental','shock','terrible','very_happy']
 
-
+#for all emotions one by one
 for e in emo:
+    #change the path if required, and change male/female correspondinlgy
     path1 = "/Users/praneelrathore/PycharmProjects/Project_8_sem/data_voxels/" + e + "/Male/"
     #infile = "Male_02_data-slorTransposed.txt"
+    #file3 is for the voxels file, uncomment the code below for voxels data (not tested)
     file3 = "MNI-BAs-6239-voxels.csv"
+    #path for output file, change male/female correspondingly
     path2 = "Granger_lists/"+e+"/Male/"
 
 
     for infile in os.listdir(path1):
         if not infile.startswith('.'):
+            #[0:7] for males, [0:9] for females for simplicity
             outfile = "Output_"+infile[0:7]+"_"+e+".txt"
             print ('infile', infile)
             print ('outfile', outfile)
             tstart = datetime.now()
             data = pd.DataFrame.as_matrix(pd.read_csv(path1+infile, sep="\t", header=None))
             print data.shape
+            #commemted code is for the voxels.
             '''
             data_excel = list(csv.reader(open(file3, 'rb'), delimiter=','))
 
@@ -118,6 +126,7 @@ for e in emo:
             print datetime.now() - tstart
             break
             '''
+            #code below compute granger causality between all electrodes pairwise, and store them in the file.
             relation_list=[]
             for i in range(0,32):
 
