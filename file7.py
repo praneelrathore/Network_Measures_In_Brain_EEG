@@ -1,3 +1,4 @@
+#This file will read the granger causality data, and will compute graphs from it, saving it in direcory graphs.
 from scipy import signal
 import pandas as pd
 import numpy as np
@@ -16,16 +17,18 @@ import functions as func
 from datetime import datetime
 import os
 
+#for all the emotions
 emo = ['cheerful','depressing','exciting','fun','happy','hate','joy','love','lovely','melancholy','mellow','sad','senti','sentimental','shock','terrible','very_happy']
 
 for e in emo:
-
+    #change male/female accordingly
     path1 = "Granger_lists/"+e+"/Male/"
     path2 = "Graphs/" + e + "/Male/"
     thres = 0.01
 
 
     for infile in os.listdir(path1):
+        #[7:14] for males, [7:16] for females.
         outfile = "Graph_"+infile[7:14]+"_"+e+".net"
         print ('infile', infile)
         print ('outfile', outfile)
